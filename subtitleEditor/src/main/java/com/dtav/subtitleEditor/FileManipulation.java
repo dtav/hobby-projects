@@ -17,7 +17,7 @@ public class FileManipulation {
 	}
 
 	public FileManipulation(String strfileIn) {
-		this.fileIn = new File(strfileIn);
+		this.fileIn = new File(ROOT_DIR+strfileIn);
 	}
 
 	public File multiplyTextBy(int multiple) throws IOException {

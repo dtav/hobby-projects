@@ -13,11 +13,11 @@ public class SimpleApplication {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
 		String subName = "subtitle1.srt";
-		String fullSubName = buildFullFilePath(subName);
+		
 		
 		
 		//normalizing standard
-		SubtitleEditor subEditor = new SubtitleEditor(fullSubName, fullSubName+"_normalized.srt");
+		SubtitleEditor subEditor = new SubtitleEditor(subName);
 		long startTime = System.nanoTime();
 		subEditor.normalize(false);
 		long endTime = System.nanoTime();
@@ -27,7 +27,7 @@ public class SimpleApplication {
 		
 		//multiplying standard		
 		startTime = System.nanoTime();
-		FileManipulation fileManipulator = new FileManipulation(fullSubName);
+		FileManipulation fileManipulator = new FileManipulation(subName);
 		File manipulated = fileManipulator.multiplyTextBy(1000);
 		endTime = System.nanoTime();
 		
@@ -35,7 +35,7 @@ public class SimpleApplication {
 		System.out.println("MULTIPLY: " + durationMil+"ms");
 		
 		//normalize multiplied 1000
-		subEditor = new SubtitleEditor(manipulated.getAbsolutePath(), manipulated.getAbsolutePath()+"_normalized.srt");
+		subEditor = new SubtitleEditor(manipulated.getName());
 		startTime = System.nanoTime();
 		subEditor.normalize(false);
 		endTime = System.nanoTime();

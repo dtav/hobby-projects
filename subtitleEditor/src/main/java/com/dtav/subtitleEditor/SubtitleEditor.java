@@ -7,21 +7,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class SubtitleEditor {
+	static final String ROOT_DIR = "src/main/resources/";
+
 	File fileIn;
-	File fileOut;
-	
-	public SubtitleEditor(String in, String out){
-		this.fileIn = new File(in);
-		this.fileOut = new File(out);
+		
+	public SubtitleEditor(String in){
+		this.fileIn = new File(ROOT_DIR+in);		
 	}
 
-	public SubtitleEditor(File fileIn, File fileOut) {
-		super();
+	public SubtitleEditor(File fileIn) {
+		
 		this.fileIn = fileIn;
-		this.fileOut = fileOut;
+		
 	}
 	
 	public File getFileIn() {
@@ -32,16 +33,13 @@ public class SubtitleEditor {
 		this.fileIn = fileIn;
 	}
 
-	public File getFileOut() {
-		return fileOut;
-	}
 
-	public void setFileOut(File fileOut) {
-		this.fileOut = fileOut;
-	}
-
-	public void normalize(Boolean withDebug) throws IOException {
+	public File normalize(Boolean withDebug) throws IOException {
 		BufferedReader bfr = new BufferedReader(new FileReader(fileIn));
+		String withoutExtension = FilenameUtils.getBaseName(this.fileIn.getAbsolutePath());
+		System.out.println(withoutExtension);
+		withoutExtension = ROOT_DIR+withoutExtension;
+		File fileOut = new File(withoutExtension + "_normalized.srt");
 		String line;
 		PrintWriter pw = new PrintWriter(new FileWriter(fileOut));
 
@@ -122,6 +120,8 @@ public class SubtitleEditor {
 		bfr.close();
 
 		System.out.println("End...");
+		
+		return fileOut;
 
 	}
 }
