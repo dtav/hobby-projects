@@ -1,4 +1,4 @@
-package com.dtav.subtitleEditor;
+package com.dtav.subtitleEditor.editors;
 
 import java.util.regex.Pattern;
 
@@ -14,9 +14,9 @@ public class TextEdit {
 		return isAlpha;
 	}
 
-	public static boolean checkIfLineEndsWithFullStop(String line) {
+	public static boolean checkIfLineEndsWithEndPunctuation(String line) {
 		// System.out.println("-----f.stop-----");
-		if (line.endsWith(".")) {
+		if (line.endsWith(".") || line.endsWith("?") || line.endsWith("!")) {
 			// System.out.println("FULL STOP");
 			// System.out.println("-----f.stop-----");
 			return true;
@@ -26,5 +26,17 @@ public class TextEdit {
 			return false;
 		}
 
+	}
+	
+	//String.replace(string, string)
+	public static int checkIfLineContainsI(String line){
+		System.out.println("--------I--------");
+		if (line.contains(" i ")){
+			System.out.println("CONTAINS i");
+			
+		}
+		System.out.println("--------I---*-*-*");
+		return line.indexOf(" i ");
+		
 	}
 }
